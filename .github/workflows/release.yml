@@ -17,10 +17,16 @@ on:
         description: 'Mark as prerelease? (true/false)'
         required: false
         default: 'false'
+      generate_release_notes:
+        description: 'Generate release notes automatically? (true/false)'
+        required: false
+        default: 'false'
 
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,8 +57,9 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ inputs.tag }}
-          name: ${{ inputs.release_name }}
+          name: ${{ inputs.release_name || inputs.tag }}
           body: ${{ inputs.release_body }}
-          files: build/libs/*.jar
+          generateReleaseNotes: ${{ inputs.generate_release_notes }}
+          artifacts: build/libs/*.jar
           draft: false
           prerelease: ${{ inputs.prerelease }}
