@@ -18,3 +18,4 @@
 
 - ビルドは `./gradlew clean build` で実行されます。
 - リリース作成には `contents: write` 権限が必要です。
+- アーティファクトの添付は `build/libs/*.jar` を対象にしています。

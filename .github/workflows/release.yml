@@ -60,6 +60,7 @@ jobs:
           name: ${{ inputs.release_name || inputs.tag }}
           body: ${{ inputs.release_body }}
           generateReleaseNotes: ${{ inputs.generate_release_notes }}
-          files: build/libs/*.jar
+
+          artifacts: build/libs/*.jar
           draft: false
           prerelease: ${{ inputs.prerelease }}
