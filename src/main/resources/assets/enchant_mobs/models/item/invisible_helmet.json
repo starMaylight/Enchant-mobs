@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "enchant_mobs:item/invisible_helmet"
+  }
+}
