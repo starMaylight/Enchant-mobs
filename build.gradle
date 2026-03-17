@@ -131,8 +131,12 @@ mixin {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    flatDir {
-        dir 'libs'
+    maven {
+        name = "CurseMaven"
+        url = "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
     }
 }
 
@@ -161,10 +165,10 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    // L2 Hostility optional dependency (compile-only, not bundled)
-    compileOnly fg.deobf("blank:l2hostility:2.5.18")
-    compileOnly fg.deobf("blank:l2library:2.5.3")
-    compileOnly fg.deobf("blank:l2complements:2.6.1")
+    // L2 Hostility optional dependency via CurseMaven (compile-only, not bundled)
+    compileOnly fg.deobf("curse.maven:l2hostility-909207:7746182")
+    compileOnly fg.deobf("curse.maven:l2library-620203:6806000")
+    compileOnly fg.deobf("curse.maven:l2-complements-758349:7606338")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

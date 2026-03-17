@@ -14,7 +14,6 @@ public class L2HostilityCompat {
         if (!isLoaded()) return;
 
         target.getCapability(MobTraitCap.CAPABILITY).ifPresent(cap -> {
-            // Clear all traits and deinit to remove attribute/effect modifications
             cap.deinit();
             cap.traits.clear();
             cap.lv = 0;
