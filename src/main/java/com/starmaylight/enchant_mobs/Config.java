@@ -124,7 +124,11 @@ public class Config {
                         "enchant_mobs:trait_purge=100",
                         "enchant_mobs:physical_immunity=100",
                         "enchant_mobs:death_touch=100",
-                        "enchant_mobs:slowness_aura=50"
+                        "enchant_mobs:slowness_aura=50",
+                        "enchant_mobs:annihilation=150",
+                        "enchant_mobs:overflow_heal=50",
+                        "enchant_mobs:enchant_strip=100",
+                        "enchant_mobs:creative_flight=100"
                 ), Config::validateThresholdEntry);
         BUILDER.pop();
 

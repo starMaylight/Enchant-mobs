@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "enchant_mobs:block/enchant_hazard"
+    }
+  }
+}

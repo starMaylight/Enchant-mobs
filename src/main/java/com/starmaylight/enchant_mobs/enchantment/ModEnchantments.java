@@ -33,6 +33,21 @@ public class ModEnchantments {
     public static final RegistryObject<Enchantment> SLOWNESS_AURA = ENCHANTMENTS.register("slowness_aura",
             SlownessAuraEnchantment::new);
 
+    public static final RegistryObject<Enchantment> ANNIHILATION = ENCHANTMENTS.register("annihilation",
+            AnnihilationEnchantment::new);
+
+    public static final RegistryObject<Enchantment> DEBUFF_AURA = ENCHANTMENTS.register("debuff_aura",
+            DebuffAuraEnchantment::new);
+
+    public static final RegistryObject<Enchantment> OVERFLOW_HEAL = ENCHANTMENTS.register("overflow_heal",
+            OverflowHealEnchantment::new);
+
+    public static final RegistryObject<Enchantment> ENCHANT_STRIP = ENCHANTMENTS.register("enchant_strip",
+            EnchantStripEnchantment::new);
+
+    public static final RegistryObject<Enchantment> CREATIVE_FLIGHT = ENCHANTMENTS.register("creative_flight",
+            CreativeFlightEnchantment::new);
+
     public static void register(IEventBus eventBus) {
         ENCHANTMENTS.register(eventBus);
     }

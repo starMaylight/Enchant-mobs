@@ -2,6 +2,8 @@ package com.starmaylight.enchant_mobs;
 
 import com.mojang.logging.LogUtils;
 import com.starmaylight.enchant_mobs.affix.AffixRegistry;
+import com.starmaylight.enchant_mobs.block.ModBlockEntities;
+import com.starmaylight.enchant_mobs.block.ModBlocks;
 import com.starmaylight.enchant_mobs.enchantment.ModEnchantments;
 import com.starmaylight.enchant_mobs.item.ModCreativeTab;
 import com.starmaylight.enchant_mobs.item.ModItems;
@@ -31,7 +33,9 @@ public class Enchant_mobs {
 
         modEventBus.addListener(this::commonSetup);
 
-        // Register ModItems, Enchantments, Creative Tab
+        // Register Blocks, Block Entities, ModItems, Enchantments, Creative Tab
+        ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModItems.register(modEventBus);
         ModEnchantments.register(modEventBus);
         ModCreativeTab.register(modEventBus);

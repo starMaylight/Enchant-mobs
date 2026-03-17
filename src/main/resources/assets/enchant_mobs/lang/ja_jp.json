@@ -9,6 +9,11 @@
   "enchantment.enchant_mobs.physical_immunity": "物理無効",
   "enchantment.enchant_mobs.death_touch": "死の指先",
   "enchantment.enchant_mobs.slowness_aura": "鈍足のオーラ",
+  "enchantment.enchant_mobs.annihilation": "殲滅",
+  "enchantment.enchant_mobs.debuff_aura": "呪詛のオーラ",
+  "enchantment.enchant_mobs.overflow_heal": "過剰回復",
+  "enchantment.enchant_mobs.enchant_strip": "エンチャント剥奪",
+  "enchantment.enchant_mobs.creative_flight": "天翔",
 
   "item.enchant_mobs.hazard_crystal_up": "ハザードクリスタル（上昇）",
   "item.enchant_mobs.hazard_crystal_down": "ハザードクリスタル（減少）",
@@ -16,6 +21,10 @@
   "item.enchant_mobs.hazard_crystal.decrease_tooltip": "右クリックでハザードレベルを%s減少",
   "item.enchant_mobs.hazard_crystal.increase_msg": "ハザードレベルが%sに上昇しました",
   "item.enchant_mobs.hazard_crystal.decrease_msg": "ハザードレベルが%sに減少しました",
+
+  "block.enchant_mobs.enchant_hazard": "エンチャントハザード",
+  "block.enchant_mobs.enchant_hazard.boss_bar": "エンチャントハザード",
+  "entity.enchant_mobs.enchant_hazard_boss": "エンチャントハザード",
 
   "itemGroup.enchant_mobs": "エンチャントモブ"
 }

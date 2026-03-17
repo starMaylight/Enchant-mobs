@@ -21,6 +21,7 @@ public class ModCreativeTab {
                     .displayItems((params, output) -> {
                         output.accept(ModItems.HAZARD_CRYSTAL_UP.get());
                         output.accept(ModItems.HAZARD_CRYSTAL_DOWN.get());
+                        output.accept(ModItems.ENCHANT_HAZARD_ITEM.get());
                     })
                     .build());
 

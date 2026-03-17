@@ -1,7 +1,9 @@
 package com.starmaylight.enchant_mobs.item;
 
 import com.starmaylight.enchant_mobs.Enchant_mobs;
+import com.starmaylight.enchant_mobs.block.ModBlocks;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -37,6 +39,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> HAZARD_CRYSTAL_DOWN = ITEMS.register("hazard_crystal_down",
             () -> new HazardCrystalItem(new Item.Properties().stacksTo(1), -10));
+
+    public static final RegistryObject<Item> ENCHANT_HAZARD_ITEM = ITEMS.register("enchant_hazard",
+            () -> new BlockItem(ModBlocks.ENCHANT_HAZARD.get(), new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

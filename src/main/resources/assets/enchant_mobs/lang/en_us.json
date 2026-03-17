@@ -9,6 +9,11 @@
   "enchantment.enchant_mobs.physical_immunity": "Physical Immunity",
   "enchantment.enchant_mobs.death_touch": "Death Touch",
   "enchantment.enchant_mobs.slowness_aura": "Slowness Aura",
+  "enchantment.enchant_mobs.annihilation": "Annihilation",
+  "enchantment.enchant_mobs.debuff_aura": "Debuff Aura",
+  "enchantment.enchant_mobs.overflow_heal": "Overflow Heal",
+  "enchantment.enchant_mobs.enchant_strip": "Enchant Strip",
+  "enchantment.enchant_mobs.creative_flight": "Creative Flight",
 
   "item.enchant_mobs.hazard_crystal_up": "Hazard Crystal (Increase)",
   "item.enchant_mobs.hazard_crystal_down": "Hazard Crystal (Decrease)",
@@ -16,6 +21,10 @@
   "item.enchant_mobs.hazard_crystal.decrease_tooltip": "Right-click to decrease Hazard Level by %s",
   "item.enchant_mobs.hazard_crystal.increase_msg": "Hazard Level increased to %s",
   "item.enchant_mobs.hazard_crystal.decrease_msg": "Hazard Level decreased to %s",
+
+  "block.enchant_mobs.enchant_hazard": "Enchant Hazard",
+  "block.enchant_mobs.enchant_hazard.boss_bar": "Enchant Hazard",
+  "entity.enchant_mobs.enchant_hazard_boss": "Enchant Hazard",
 
   "itemGroup.enchant_mobs": "Enchant Mobs"
 }

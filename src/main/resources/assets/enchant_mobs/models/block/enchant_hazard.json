@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "enchant_mobs:block/enchant_hazard"
+  }
+}
