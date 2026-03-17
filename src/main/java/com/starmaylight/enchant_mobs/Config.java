@@ -36,6 +36,9 @@ public class Config {
     // === Enchantment Blacklist ===
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ENCHANTMENT_BLACKLIST;
 
+    // === Enchant Hazard Boss Blacklist ===
+    private static final ForgeConfigSpec.ConfigValue<List<? extends String>> HAZARD_BOSS_BLACKLIST;
+
     // === Hazard Thresholds ===
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> HAZARD_THRESHOLDS;
 
@@ -112,6 +115,16 @@ public class Config {
                 ), Config::validateEnchantmentName);
         BUILDER.pop();
 
+        BUILDER.push("enchantHazard");
+        HAZARD_BOSS_BLACKLIST = BUILDER
+                .comment("Entity IDs to exclude from Enchant Hazard boss summoning.",
+                        "Use this to prevent problematic bosses (e.g., those that crash or break the game).",
+                        "Format: 'modid:entity_id'")
+                .defineListAllowEmpty("bossBlacklist", List.of(
+                        "minecraft:ender_dragon"
+                ), Config::validateEntityName);
+        BUILDER.pop();
+
         BUILDER.push("hazardThresholds");
         HAZARD_THRESHOLDS = BUILDER
                 .comment("Enchantments that require a minimum hazard level to appear as affixes.",
@@ -155,6 +168,7 @@ public class Config {
     public static double bonusAffixChance;
     public static double baseBookDropRate;
     public static Set<String> enchantmentBlacklist;
+    public static Set<String> hazardBossBlacklist;
     public static Map<String, Integer> hazardThresholds;
     public static boolean persistAcrossDeath;
 
@@ -225,6 +239,7 @@ public class Config {
         bonusAffixChance = BONUS_AFFIX_CHANCE.get();
         baseBookDropRate = BASE_BOOK_DROP_RATE.get();
         enchantmentBlacklist = new HashSet<>(ENCHANTMENT_BLACKLIST.get());
+        hazardBossBlacklist = new HashSet<>(HAZARD_BOSS_BLACKLIST.get());
         hazardThresholds = parseThresholds(HAZARD_THRESHOLDS.get());
         persistAcrossDeath = PERSIST_ACROSS_DEATH.get();
     }

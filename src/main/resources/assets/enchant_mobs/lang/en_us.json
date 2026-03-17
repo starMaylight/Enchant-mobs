@@ -22,9 +22,15 @@
   "item.enchant_mobs.hazard_crystal.increase_msg": "Hazard Level increased to %s",
   "item.enchant_mobs.hazard_crystal.decrease_msg": "Hazard Level decreased to %s",
 
+  "item.enchant_mobs.hazard_spawn_egg": "Enchant Hazard Spawn Egg",
+  "item.enchant_mobs.hazard_spawn_egg.tooltip": "Right-click to summon the Enchant Hazard",
+  "item.enchant_mobs.hazard_spawn_egg.tooltip2": "Defeat 100 bosses to earn Annihilation V",
+  "item.enchant_mobs.hazard_disassembler": "Hazard Disassembler",
+  "item.enchant_mobs.hazard_disassembler.tooltip": "Right-click on Enchant Hazard to disassemble it",
+  "item.enchant_mobs.hazard_disassembler.msg": "Enchant Hazard disassembled. Spawn Egg recovered.",
+
   "block.enchant_mobs.enchant_hazard": "Enchant Hazard",
   "block.enchant_mobs.enchant_hazard.boss_bar": "Enchant Hazard",
-  "entity.enchant_mobs.enchant_hazard_boss": "Enchant Hazard",
 
   "itemGroup.enchant_mobs": "Enchant Mobs"
 }

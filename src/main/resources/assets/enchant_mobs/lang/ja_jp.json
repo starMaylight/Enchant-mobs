@@ -22,9 +22,15 @@
   "item.enchant_mobs.hazard_crystal.increase_msg": "ハザードレベルが%sに上昇しました",
   "item.enchant_mobs.hazard_crystal.decrease_msg": "ハザードレベルが%sに減少しました",
 
+  "item.enchant_mobs.hazard_spawn_egg": "エンチャントハザードの卵",
+  "item.enchant_mobs.hazard_spawn_egg.tooltip": "右クリックでエンチャントハザードを召喚",
+  "item.enchant_mobs.hazard_spawn_egg.tooltip2": "ボスを100体撃破で殲滅Vを獲得",
+  "item.enchant_mobs.hazard_disassembler": "ハザード解体装置",
+  "item.enchant_mobs.hazard_disassembler.tooltip": "エンチャントハザードを右クリックで解体",
+  "item.enchant_mobs.hazard_disassembler.msg": "エンチャントハザードを解体しました。卵を回収しました。",
+
   "block.enchant_mobs.enchant_hazard": "エンチャントハザード",
   "block.enchant_mobs.enchant_hazard.boss_bar": "エンチャントハザード",
-  "entity.enchant_mobs.enchant_hazard_boss": "エンチャントハザード",
 
   "itemGroup.enchant_mobs": "エンチャントモブ"
 }

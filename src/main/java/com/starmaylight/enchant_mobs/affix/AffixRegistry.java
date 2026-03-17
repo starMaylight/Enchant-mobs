@@ -2,6 +2,7 @@ package com.starmaylight.enchant_mobs.affix;
 
 import com.mojang.logging.LogUtils;
 import com.starmaylight.enchant_mobs.Config;
+import com.starmaylight.enchant_mobs.Enchant_mobs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -20,6 +21,11 @@ public class AffixRegistry {
     private static final List<Affix> ARMOR_AFFIXES = new ArrayList<>();
     private static final List<Affix> WEAPON_AFFIXES = new ArrayList<>();
     private static final Map<ResourceLocation, List<Affix>> AFFIXES_BY_ENCHANTMENT = new HashMap<>();
+
+    /** Enchantments that should never appear as affixes (boss-reward only) */
+    private static final Set<String> AFFIX_EXCLUDED_ENCHANTMENTS = Set.of(
+            Enchant_mobs.MODID + ":annihilation"
+    );
 
     private static boolean initialized = false;
 
@@ -41,6 +47,12 @@ public class AffixRegistry {
 
             if (Config.enchantmentBlacklist != null && Config.enchantmentBlacklist.contains(id.toString())) {
                 LOGGER.debug("Skipping blacklisted enchantment: {}", id);
+                continue;
+            }
+
+            // Skip enchantments that are boss-reward only (e.g. Annihilation)
+            if (AFFIX_EXCLUDED_ENCHANTMENTS.contains(id.toString())) {
+                LOGGER.debug("Skipping boss-reward-only enchantment: {}", id);
                 continue;
             }
 

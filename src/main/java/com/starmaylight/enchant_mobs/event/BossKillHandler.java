@@ -2,8 +2,8 @@ package com.starmaylight.enchant_mobs.event;
 
 import com.starmaylight.enchant_mobs.Config;
 import com.starmaylight.enchant_mobs.Enchant_mobs;
-import com.starmaylight.enchant_mobs.block.ModBlocks;
 import com.starmaylight.enchant_mobs.capability.CapabilityRegistry;
+import com.starmaylight.enchant_mobs.item.ModItems;
 import com.starmaylight.enchant_mobs.network.ModNetworking;
 import com.starmaylight.enchant_mobs.network.SyncHazardLevelPacket;
 import net.minecraft.ChatFormatting;
@@ -77,14 +77,14 @@ public class BossKillHandler {
                 ));
             }
 
-            // Drop Enchant Hazard block at 3% when hazard is at max
+            // Drop Hazard Spawn Egg at 3% when hazard is at max
             if (newHazard >= Config.maxHazardLevel) {
                 if (player.getRandom().nextFloat() < 0.03f) {
-                    ItemStack hazardBlock = new ItemStack(ModBlocks.ENCHANT_HAZARD.get());
+                    ItemStack spawnEgg = new ItemStack(ModItems.HAZARD_SPAWN_EGG.get());
                     ItemEntity drop = new ItemEntity(
                             player.level(),
                             player.getX(), player.getY(), player.getZ(),
-                            hazardBlock
+                            spawnEgg
                     );
                     drop.setDefaultPickUpDelay();
                     player.level().addFreshEntity(drop);

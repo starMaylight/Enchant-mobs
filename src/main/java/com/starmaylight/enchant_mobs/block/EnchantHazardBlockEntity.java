@@ -253,17 +253,21 @@ public class EnchantHazardBlockEntity extends BlockEntity {
             return cachedBossTypes;
         }
 
+        Set<String> blacklist = Config.hazardBossBlacklist != null
+                ? Config.hazardBossBlacklist : Set.of();
+
         List<EntityType<?>> bosses = new ArrayList<>();
 
-        // Hardcoded vanilla bosses
-        bosses.add(EntityType.WITHER);
-        bosses.add(EntityType.ENDER_DRAGON);
-        bosses.add(EntityType.ELDER_GUARDIAN);
-        bosses.add(EntityType.WARDEN);
+        // Hardcoded vanilla bosses (filtered by blacklist)
+        addIfNotBlacklisted(bosses, EntityType.WITHER, blacklist);
+        addIfNotBlacklisted(bosses, EntityType.ENDER_DRAGON, blacklist);
+        addIfNotBlacklisted(bosses, EntityType.ELDER_GUARDIAN, blacklist);
+        addIfNotBlacklisted(bosses, EntityType.WARDEN, blacklist);
 
-        // From config
+        // From config (filtered by blacklist)
         if (Config.customBossEntities != null) {
             for (String id : Config.customBossEntities) {
+                if (blacklist.contains(id)) continue;
                 EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(id));
                 if (type != null && !bosses.contains(type)) {
                     bosses.add(type);
@@ -271,8 +275,10 @@ public class EnchantHazardBlockEntity extends BlockEntity {
             }
         }
 
-        // Scan registry for anything with "boss" in name
+        // Scan registry for anything with "boss" in name (filtered by blacklist)
         for (var entry : ForgeRegistries.ENTITY_TYPES.getEntries()) {
+            String entityId = entry.getKey().location().toString();
+            if (blacklist.contains(entityId)) continue;
             if (entry.getKey().location().getPath().contains("boss") && !bosses.contains(entry.getValue())) {
                 bosses.add(entry.getValue());
             }
@@ -280,7 +286,15 @@ public class EnchantHazardBlockEntity extends BlockEntity {
 
         // Remove duplicates while preserving order
         cachedBossTypes = new ArrayList<>(new LinkedHashSet<>(bosses));
+        LOGGER.info("Enchant Hazard: Collected {} boss types (blacklisted: {})", cachedBossTypes.size(), blacklist);
         return cachedBossTypes;
+    }
+
+    private void addIfNotBlacklisted(List<EntityType<?>> list, EntityType<?> type, Set<String> blacklist) {
+        ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(type);
+        if (id != null && !blacklist.contains(id.toString()) && !list.contains(type)) {
+            list.add(type);
+        }
     }
 
     private List<EntityType<?>> collectMonsterTypes() {
@@ -346,6 +360,38 @@ public class EnchantHazardBlockEntity extends BlockEntity {
         // Self-destruct the block
         active = false;
         serverLevel.destroyBlock(pos, false);
+    }
+
+    /**
+     * Called by HazardDisassemblerItem to cleanly stop the encounter.
+     * Despawns all summoned bosses and minions, cleans up boss bar.
+     */
+    public void cleanupForDisassembly(ServerLevel serverLevel) {
+        // Despawn all summoned bosses
+        for (UUID bossId : summonedBosses) {
+            Entity entity = serverLevel.getEntity(bossId);
+            if (entity != null && entity.isAlive()) {
+                entity.discard();
+            }
+        }
+        summonedBosses.clear();
+
+        // Despawn all summoned minions
+        for (UUID minionId : summonedMinions) {
+            Entity entity = serverLevel.getEntity(minionId);
+            if (entity != null && entity.isAlive()) {
+                entity.discard();
+            }
+        }
+        summonedMinions.clear();
+
+        active = false;
+
+        // Clean up boss bar
+        if (bossEvent != null) {
+            bossEvent.removeAllPlayers();
+            bossEvent = null;
+        }
     }
 
     @Override
