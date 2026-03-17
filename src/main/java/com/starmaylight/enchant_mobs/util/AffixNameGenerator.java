@@ -21,17 +21,19 @@ public class AffixNameGenerator {
         int maxTier = data.getMaxTier();
         ChatFormatting color = TIER_COLORS[Math.min(maxTier / 2, TIER_COLORS.length - 1)];
 
-        StringBuilder prefixBuilder = new StringBuilder();
+        MutableComponent prefixComponent = Component.empty();
+        boolean first = true;
         for (AffixInstance inst : data.getAffixes()) {
-            if (prefixBuilder.length() > 0) {
-                prefixBuilder.append(", ");
+            if (!first) {
+                prefixComponent.append(Component.literal(", "));
             }
-            prefixBuilder.append(inst.getAffix().getDisplayName());
+            prefixComponent.append(inst.getAffix().getDisplayComponent());
+            first = false;
         }
 
-        String baseName = mob.getType().getDescription().getString();
-
-        MutableComponent nameComponent = Component.literal(prefixBuilder + " " + baseName)
+        MutableComponent nameComponent = prefixComponent
+                .append(Component.literal(" "))
+                .append(mob.getType().getDescription().copy())
                 .withStyle(color)
                 .withStyle(ChatFormatting.BOLD);
 

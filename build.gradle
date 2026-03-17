@@ -131,14 +131,9 @@ mixin {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    // Put repositories for dependencies here
-    // ForgeGradle automatically adds the Forge maven and Maven Central for you
-
-    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
-    // flatDir {
-    //     dir 'libs'
-    // }
+    flatDir {
+        dir 'libs'
+    }
 }
 
 dependencies {
@@ -166,6 +161,10 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
+    // L2 Hostility optional dependency (compile-only, not bundled)
+    compileOnly fg.deobf("blank:l2hostility:2.5.18")
+    compileOnly fg.deobf("blank:l2library:2.5.3")
+    compileOnly fg.deobf("blank:l2complements:2.6.1")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

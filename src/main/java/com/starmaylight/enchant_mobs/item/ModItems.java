@@ -32,6 +32,12 @@ public class ModItems {
     public static final RegistryObject<Item> INVISIBLE_SWORD = ITEMS.register("invisible_sword",
             () -> new InvisibleSwordItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> HAZARD_CRYSTAL_UP = ITEMS.register("hazard_crystal_up",
+            () -> new HazardCrystalItem(new Item.Properties().stacksTo(1), 10));
+
+    public static final RegistryObject<Item> HAZARD_CRYSTAL_DOWN = ITEMS.register("hazard_crystal_down",
+            () -> new HazardCrystalItem(new Item.Properties().stacksTo(1), -10));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

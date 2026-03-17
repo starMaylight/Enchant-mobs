@@ -7,9 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Mod.EventBusSubscriber(modid = Enchant_mobs.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Config {
@@ -38,11 +36,11 @@ public class Config {
     // === Enchantment Blacklist ===
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ENCHANTMENT_BLACKLIST;
 
+    // === Hazard Thresholds ===
+    private static final ForgeConfigSpec.ConfigValue<List<? extends String>> HAZARD_THRESHOLDS;
+
     // === Persistence ===
     private static final ForgeConfigSpec.BooleanValue PERSIST_ACROSS_DEATH;
-
-    // === Keybind ===
-    private static final ForgeConfigSpec.ConfigValue<String> HAZARD_DISPLAY_KEY;
 
     static {
         BUILDER.push("hazard");
@@ -54,7 +52,7 @@ public class Config {
                 .defineInRange("hazardScaleFactor", 2.0, 0.5, 10.0);
         MAX_HAZARD_LEVEL = BUILDER
                 .comment("Maximum hazard level achievable")
-                .defineInRange("maxHazardLevel", 10, 1, 50);
+                .defineInRange("maxHazardLevel", 200, 1, 1000);
         BUILDER.pop();
 
         BUILDER.push("bosses");
@@ -114,16 +112,26 @@ public class Config {
                 ), Config::validateEnchantmentName);
         BUILDER.pop();
 
+        BUILDER.push("hazardThresholds");
+        HAZARD_THRESHOLDS = BUILDER
+                .comment("Enchantments that require a minimum hazard level to appear as affixes.",
+                        "Format: 'modid:enchantment_name=minimum_hazard_level'",
+                        "Example: 'enchant_mobs:armor_corrosion=50'")
+                .defineListAllowEmpty("thresholds", List.of(
+                        "enchant_mobs:armor_corrosion=50",
+                        "enchant_mobs:vital_strike=50",
+                        "enchant_mobs:battle_fury=50",
+                        "enchant_mobs:trait_purge=100",
+                        "enchant_mobs:physical_immunity=100",
+                        "enchant_mobs:death_touch=100",
+                        "enchant_mobs:slowness_aura=50"
+                ), Config::validateThresholdEntry);
+        BUILDER.pop();
+
         BUILDER.push("persistence");
         PERSIST_ACROSS_DEATH = BUILDER
                 .comment("Should hazard level persist when player dies?")
                 .define("persistAcrossDeath", true);
-        BUILDER.pop();
-
-        BUILDER.push("keybind");
-        HAZARD_DISPLAY_KEY = BUILDER
-                .comment("Default key for displaying hazard level (can be changed in game controls)")
-                .define("hazardDisplayKey", "P");
         BUILDER.pop();
     }
 
@@ -143,8 +151,8 @@ public class Config {
     public static double bonusAffixChance;
     public static double baseBookDropRate;
     public static Set<String> enchantmentBlacklist;
+    public static Map<String, Integer> hazardThresholds;
     public static boolean persistAcrossDeath;
-    public static String hazardDisplayKey;
 
     private static boolean validateEntityName(final Object obj) {
         if (!(obj instanceof String)) return false;
@@ -166,6 +174,38 @@ public class Config {
         }
     }
 
+    private static boolean validateThresholdEntry(final Object obj) {
+        if (!(obj instanceof String entry)) return false;
+        String[] parts = entry.split("=");
+        if (parts.length != 2) return false;
+        try {
+            new ResourceLocation(parts[0]);
+            Integer.parseInt(parts[1]);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private static Map<String, Integer> parseThresholds(List<? extends String> list) {
+        Map<String, Integer> map = new HashMap<>();
+        for (String entry : list) {
+            String[] parts = entry.split("=");
+            if (parts.length == 2) {
+                try {
+                    map.put(parts[0], Integer.parseInt(parts[1]));
+                } catch (NumberFormatException ignored) {
+                }
+            }
+        }
+        return map;
+    }
+
+    public static int getHazardThreshold(String enchantmentId) {
+        if (hazardThresholds == null) return 0;
+        return hazardThresholds.getOrDefault(enchantmentId, 0);
+    }
+
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
         minKillsForHazard = MIN_KILLS_FOR_HAZARD.get();
@@ -181,7 +221,7 @@ public class Config {
         bonusAffixChance = BONUS_AFFIX_CHANCE.get();
         baseBookDropRate = BASE_BOOK_DROP_RATE.get();
         enchantmentBlacklist = new HashSet<>(ENCHANTMENT_BLACKLIST.get());
+        hazardThresholds = parseThresholds(HAZARD_THRESHOLDS.get());
         persistAcrossDeath = PERSIST_ACROSS_DEATH.get();
-        hazardDisplayKey = HAZARD_DISPLAY_KEY.get();
     }
 }

@@ -12,6 +12,12 @@ public interface IHazardLevelCapability {
 
     int getHazardLevel();
 
+    int getHazardLevelBonus();
+
+    void setHazardLevelBonus(int bonus);
+
+    void addHazardLevelBonus(int amount);
+
     CompoundTag serializeNBT();
 
     void deserializeNBT(CompoundTag nbt);

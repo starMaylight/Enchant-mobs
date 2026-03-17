@@ -2,6 +2,8 @@ package com.starmaylight.enchant_mobs;
 
 import com.mojang.logging.LogUtils;
 import com.starmaylight.enchant_mobs.affix.AffixRegistry;
+import com.starmaylight.enchant_mobs.enchantment.ModEnchantments;
+import com.starmaylight.enchant_mobs.item.ModCreativeTab;
 import com.starmaylight.enchant_mobs.item.ModItems;
 import com.starmaylight.enchant_mobs.network.ModNetworking;
 import net.minecraft.client.Minecraft;
@@ -29,8 +31,10 @@ public class Enchant_mobs {
 
         modEventBus.addListener(this::commonSetup);
 
-        // Register ModItems
+        // Register ModItems, Enchantments, Creative Tab
         ModItems.register(modEventBus);
+        ModEnchantments.register(modEventBus);
+        ModCreativeTab.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 

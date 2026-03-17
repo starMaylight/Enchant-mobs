@@ -1,6 +1,7 @@
 package com.starmaylight.enchant_mobs.affix;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -37,6 +38,14 @@ public class Affix {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public Component getDisplayComponent() {
+        Enchantment enchantment = getEnchantment();
+        if (enchantment != null) {
+            return enchantment.getFullname(level);
+        }
+        return Component.literal(displayName);
     }
 
     public int getTier() {

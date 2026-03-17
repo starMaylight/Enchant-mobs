@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 public class HazardLevelCapability implements IHazardLevelCapability {
 
     private int bossKillCount = 0;
+    private int hazardLevelBonus = 0;
 
     @Override
     public int getBossKillCount() {
@@ -24,21 +25,36 @@ public class HazardLevelCapability implements IHazardLevelCapability {
 
     @Override
     public int getHazardLevel() {
-        if (bossKillCount < Config.minKillsForHazard) {
-            return 0;
+        int calculatedLevel = 0;
+        if (bossKillCount >= Config.minKillsForHazard) {
+            calculatedLevel = (int) Math.floor(
+                    Config.hazardScaleFactor * Math.log(bossKillCount + 1)
+            );
         }
 
-        int level = (int) Math.floor(
-                Config.hazardScaleFactor * Math.log(bossKillCount + 1)
-        );
+        return Math.min(calculatedLevel + hazardLevelBonus, Config.maxHazardLevel);
+    }
 
-        return Math.min(level, Config.maxHazardLevel);
+    @Override
+    public int getHazardLevelBonus() {
+        return hazardLevelBonus;
+    }
+
+    @Override
+    public void setHazardLevelBonus(int bonus) {
+        this.hazardLevelBonus = Math.max(0, bonus);
+    }
+
+    @Override
+    public void addHazardLevelBonus(int amount) {
+        this.hazardLevelBonus = Math.max(0, this.hazardLevelBonus + amount);
     }
 
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag tag = new CompoundTag();
         tag.putInt("bossKillCount", bossKillCount);
+        tag.putInt("hazardLevelBonus", hazardLevelBonus);
         return tag;
     }
 
@@ -46,6 +62,9 @@ public class HazardLevelCapability implements IHazardLevelCapability {
     public void deserializeNBT(CompoundTag nbt) {
         if (nbt.contains("bossKillCount")) {
             this.bossKillCount = nbt.getInt("bossKillCount");
+        }
+        if (nbt.contains("hazardLevelBonus")) {
+            this.hazardLevelBonus = nbt.getInt("hazardLevelBonus");
         }
     }
 }

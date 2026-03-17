@@ -1,4 +1,21 @@
 {
   "key.categories.enchant_mobs": "エンチャントモブ",
-  "key.enchant_mobs.show_hazard": "ハザードレベルを表示"
+  "key.enchant_mobs.show_hazard": "ハザードレベルを表示",
+
+  "enchantment.enchant_mobs.armor_corrosion": "防具腐食",
+  "enchantment.enchant_mobs.vital_strike": "生命侵食",
+  "enchantment.enchant_mobs.battle_fury": "戦意高揚",
+  "enchantment.enchant_mobs.trait_purge": "特性浄化",
+  "enchantment.enchant_mobs.physical_immunity": "物理無効",
+  "enchantment.enchant_mobs.death_touch": "死の指先",
+  "enchantment.enchant_mobs.slowness_aura": "鈍足のオーラ",
+
+  "item.enchant_mobs.hazard_crystal_up": "ハザードクリスタル（上昇）",
+  "item.enchant_mobs.hazard_crystal_down": "ハザードクリスタル（減少）",
+  "item.enchant_mobs.hazard_crystal.increase_tooltip": "右クリックでハザードレベルを%s上昇",
+  "item.enchant_mobs.hazard_crystal.decrease_tooltip": "右クリックでハザードレベルを%s減少",
+  "item.enchant_mobs.hazard_crystal.increase_msg": "ハザードレベルが%sに上昇しました",
+  "item.enchant_mobs.hazard_crystal.decrease_msg": "ハザードレベルが%sに減少しました",
+
+  "itemGroup.enchant_mobs": "エンチャントモブ"
 }

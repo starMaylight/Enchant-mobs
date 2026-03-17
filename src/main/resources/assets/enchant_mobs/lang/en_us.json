@@ -1,4 +1,21 @@
 {
   "key.categories.enchant_mobs": "Enchant Mobs",
-  "key.enchant_mobs.show_hazard": "Show Hazard Level"
+  "key.enchant_mobs.show_hazard": "Show Hazard Level",
+
+  "enchantment.enchant_mobs.armor_corrosion": "Armor Corrosion",
+  "enchantment.enchant_mobs.vital_strike": "Vital Strike",
+  "enchantment.enchant_mobs.battle_fury": "Battle Fury",
+  "enchantment.enchant_mobs.trait_purge": "Trait Purge",
+  "enchantment.enchant_mobs.physical_immunity": "Physical Immunity",
+  "enchantment.enchant_mobs.death_touch": "Death Touch",
+  "enchantment.enchant_mobs.slowness_aura": "Slowness Aura",
+
+  "item.enchant_mobs.hazard_crystal_up": "Hazard Crystal (Increase)",
+  "item.enchant_mobs.hazard_crystal_down": "Hazard Crystal (Decrease)",
+  "item.enchant_mobs.hazard_crystal.increase_tooltip": "Right-click to increase Hazard Level by %s",
+  "item.enchant_mobs.hazard_crystal.decrease_tooltip": "Right-click to decrease Hazard Level by %s",
+  "item.enchant_mobs.hazard_crystal.increase_msg": "Hazard Level increased to %s",
+  "item.enchant_mobs.hazard_crystal.decrease_msg": "Hazard Level decreased to %s",
+
+  "itemGroup.enchant_mobs": "Enchant Mobs"
 }

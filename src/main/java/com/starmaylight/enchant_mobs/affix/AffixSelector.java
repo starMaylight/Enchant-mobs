@@ -22,6 +22,8 @@ public class AffixSelector {
         int maxTier = calculateMaxTier(hazardLevel);
 
         List<Affix> eligible = new ArrayList<>(AffixRegistry.getAffixesUpToTier(maxTier));
+        // Filter out affixes that require a higher hazard level
+        eligible.removeIf(a -> Config.getHazardThreshold(a.getEnchantmentId().toString()) > hazardLevel);
         if (eligible.isEmpty()) {
             return MobAffixData.EMPTY;
         }
