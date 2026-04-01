@@ -316,9 +316,14 @@ public class MobCombatHandler {
             target.kill();
         }
 
-        // Step 6: If STILL alive (e.g. mixin cancels tickDeath), manually drop loot and remove
+        // Step 6: If STILL alive, manually drop loot and remove
         if (target.isAlive()) {
             dropLootAndRemove(target);
+        }
+
+        // Step 7: If entity STILL exists (remove was intercepted), tag it for peaceful despawn
+        if (!target.isRemoved()) {
+            target.getPersistentData().putBoolean("enchant_mobs_force_despawn", true);
         }
     }
 
